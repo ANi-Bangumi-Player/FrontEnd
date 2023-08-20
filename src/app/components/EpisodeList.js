@@ -4,7 +4,7 @@ export default function EpisodeList(props){
     const router = useRouter();
     const {name,id} = useParams();
     const switchRoute = (event)=>{
-        if(event.target.id!=id){
+        if(event.target.key!=id){
             router.push(`/bangumi/${name}/${event.target.id}`);
         }
     }
@@ -19,7 +19,7 @@ export default function EpisodeList(props){
             `${idx+1==id?props.activeclassName:""} ${props.bothClassName}`
         }
         onClick={switchRoute}
-        id={idx+1}
+        key={idx+1}
     >{idx+1}</span>
 ))
 }
