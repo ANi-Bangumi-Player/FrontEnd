@@ -23,13 +23,13 @@ export default function Navbar(){
             aria-controls="navbarSupportedContent1"
             aria-expanded="false"
             aria-label="Toggle navigation">
-                        <span>Nothing here.</span>
+                        <span>Bangumi-Go!</span>
             </button>
         </div>
         <div className="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto" id="navbarSupportedContent1"
             data-te-collapse-item>
                 <a className="mb-4 ml-2 mr-5 mt-3 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400 lg:mb-0 lg:mt-0"
-                    href="#">
+                    href="/">
                 Bangumi-Go!
             </a>
             <ul 

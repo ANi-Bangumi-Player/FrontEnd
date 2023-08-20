@@ -1,5 +1,5 @@
 "use client";
-import BangumiList from "../components/ListBangumi";
+import BangumiList from "../components/listBangumi";
 import {useSearchParams} from "next/navigation";
 import Error from "../utils/error";
 import config from "../config";
