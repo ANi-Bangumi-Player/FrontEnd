@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "artplayer": "^5.0.9",
     "autoprefixer": "10.4.15",
     "dplayer": "^1.27.1",
     "next": "13.4.18",
