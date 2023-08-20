@@ -9,8 +9,17 @@ export default function Player(){
     return <>
         <h1>{decodeURI(name)}   第{id}集</h1>
         <div className="flex">
-            <DPlayer className="aspect-video basis-3/4" src={src}/>
-            <EpisodeList number={epinum} now={id} />
+            <div className="flex basis-9/12 relative"><DPlayer className="" src={src}/></div>
+            <div className="flex basis-3/12 relative">
+                <EpisodeList number={epinum} now={id} 
+                className="sidebar" 
+                //overflow-y-auto h-full bg-[#f1f2f3] rounded-lg p-[8em] absolute inset-0
+                bothClassName="item"
+                activeclassName="active"
+                // inactiveclassName="mb-[8rem] py-[4px] px-[10px] rounded-lg block w-full overflow-hidden text-ellipsis break-all whitespace-nowrap cursor-pointer border-1 border-solid border-white" 
+                // activeclassName="mb-[8rem] py-[4px] px-[10px] rounded-lg block w-full overflow-hidden text-ellipsis break-all whitespace-nowrap cursor-pointer border-1 border-solid border-white "
+                />
+            </div>
         </div>
         </>
 }
