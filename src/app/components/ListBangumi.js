@@ -3,14 +3,15 @@ import { useState,useEffect } from "react";
 import Error from '@/app/utils/error';
 import LazyImg from "@/app/components/LazyImg";
 import { useRouter } from "next/navigation";
+import { setConfig } from "next/config";
 export default function BangumiList(props){
-    const [data,setData] = useState([]);
-    const [loading,setLoading] = useState(true);
-    const [currentPage,setcurrentPage] = useState(props.pageId||1);
-    const [totalPage,settotalPage] = useState(1);
+    // console.log(props);
+    const [currentPage,setcurrentPage] = useState(props.pageId);
     const itemPerPage = 18;
+    // const data = props.data;
+    const totalPage = Math.ceil(props.data.length/itemPerPage);
     const changeParams = (pageId) => {
-        history.replaceState(null,document.title,`/?p=${pageId}`)
+        history.replaceState(null,document.title,`/?p=${pageId}${props.query!=""?`&q=${props.query}`:``}`)
     }
     const handlePagenation = (event) =>{
         setcurrentPage(event.target.innerHTML);
@@ -24,25 +25,10 @@ export default function BangumiList(props){
         setcurrentPage(currentPage==totalPage?1:currentPage+1);
         changeParams(currentPage==totalPage?1:currentPage+1);
     }
-
-    const fetchData = async () =>{
-        try{
-            const response = await fetch(props.listurl);
-            const data = await response.json();
-            setData(data);
-            setLoading(false);
-            settotalPage(Math.ceil(data.length / itemPerPage));
-        }
-        catch(error) {
-            console.error("Failed to fetch.",error);
-            setLoading(false);
-        }
-    }
-    useEffect(()=>{
-        fetchData();
-    },[]);
-    if(loading){
-        return (<div id="bangumilist" class="mx-auto grid xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 container columns-2 gap-8">
+    const router = useRouter();
+    
+    if(props.loading){
+        return (<div id="bangumilist" className="mx-auto grid xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 container columns-2 gap-8">
             {
                 Array(20).fill(0).map((o,p)=>(
                     
@@ -61,20 +47,27 @@ export default function BangumiList(props){
         </div>)
     }
 
-    if (!data&&!loading) {
-        return (<Error h1="加载失败惹qaq" hints="要再来一次吗" backIndex={false}><a
+    if ((!props.data&&!props.loading)|| (props.data.length==0&&!props.loading)) {
+        return (<Error h1="没找到呢？" hints="看看是不是输错了" backIndex={false}><a
                 className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                 data-te-ripple-init
                 data-te-ripple-color="light"
                 role="button"
-                onClick={fetchData}
-            >重新加载！</a
+                onClick={()=>{router.push("/")}}
+            >返回主页！</a
             ></Error>)
     }
     const renderBangumiList = ()=>{
         const startIdx = (currentPage-1)*itemPerPage;
         const endIdx = startIdx+itemPerPage;
-        const currentItem = data.slice(startIdx,endIdx);
+        let currentItem = props.data.slice(startIdx,endIdx);
+        if(currentItem.length==0){
+            setcurrentPage(1);
+            changeParams(1);
+            const startIdx = (0)*itemPerPage;
+            const endIdx = 0+itemPerPage;
+            currentItem = props.data.slice(startIdx,endIdx);
+        }
         return currentItem.map((item,idx)=>(
             <a className="flex flex-col w-full" href={`/bangumi/${item.name}/1`}>
                 <LazyImg src={`https://mikanani.me${item.cover}`} alt={item.name}/>
@@ -84,7 +77,7 @@ export default function BangumiList(props){
         ))
     }
     return (<div>
-            <div id="bangumilist" class="mx-auto grid xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 container columns-2 gap-8">
+            <div id="bangumilist" className="mx-auto grid xl:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 container columns-2 gap-8">
                 {renderBangumiList()}
             </div>
             <nav aria-label="Page navigation" className="items-center justify-center mx-auto">
