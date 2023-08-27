@@ -1,7 +1,7 @@
 "use client";
 import { useState,useEffect } from "react";
 import Error from '@/app/utils/error';
-import LazyImg from "@/app/components/LazyImg";
+import LazyImg from "@/app/components/LazyImg.js";
 import { useRouter } from "next/navigation";
 import { setConfig } from "next/config";
 export default function BangumiList(props){
@@ -69,8 +69,8 @@ export default function BangumiList(props){
             currentItem = props.data.slice(startIdx,endIdx);
         }
         return currentItem.map((item,idx)=>(
-            <a className="flex flex-col w-full" href={`/bangumi/${item.name}/1`}>
-                <LazyImg src={`https://mikanani.me${item.cover}`} alt={item.name}/>
+            <a className="flex flex-col w-full" href={`/bangumi/${item.name}/`}>
+                <LazyImg src={`${item.picture}`} alt={item.name}/>
                 <p className="mt-2">{item.name}</p>
             </a>
             

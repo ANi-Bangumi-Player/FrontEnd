@@ -1,5 +1,5 @@
 "use client";
-import BangumiList from './components/listBangumi'
+import BangumiList from './components/listBangumi.js'
 import config from '@/app/config';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useState,useEffect } from 'react';

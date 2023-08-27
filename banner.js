@@ -56,7 +56,7 @@ export default function BangumiBanner(){
                     data-te-carousel-item
                     style={{"backfaceVisibility": "hidden"}}>
                         <img
-                        src={`https://mikanani.me${item.cover}`}
+                        src={`${item.picture}`}
                         className="object-none overflow-hidden block w-full "/>
                         <div 
                         className="absolute inset-x-[15%] bottom-5 hidden py-5 text-center text-white md:block"

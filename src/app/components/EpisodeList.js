@@ -1,26 +1,29 @@
 "use client";
 import { useRouter,useParams } from "next/navigation";
-export default function EpisodeList(props){
+import config from '@/app/config';
+export default async function EpisodeList(props){
     const router = useRouter();
-    const {name,id} = useParams();
+    const {name,ep} = useParams();
+    const data = await fetch(`${config.API_LIST.SEARCH_URL}${name}/all`).then(res=>res.json());
     const switchRoute = (event)=>{
-        if(event.target.key!=id){
+        if(event.target.id!=ep){
+            // console.log(event.target.id)
             router.push(`/bangumi/${name}/${event.target.id}`);
         }
     }
     return <div className={props.className}>
     {
 
-    Array(props.number).fill(114514).map((val,idx)=>(
+    data.map((val,idx)=>(
     <span
         type="button"
         aria-current="true"
         className={
-            `${idx+1==id?props.activeclassName:""} ${props.bothClassName}`
+            `${val==ep?props.activeclassName:""} ${props.bothClassName}`
         }
         onClick={switchRoute}
-        key={idx+1}
-    >{idx+1}</span>
+        id={val}
+    >{val}</span>
 ))
 }
 </div>
