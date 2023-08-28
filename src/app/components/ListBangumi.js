@@ -1,7 +1,7 @@
 "use client";
 import { useState,useEffect } from "react";
 import Error from '@/app/utils/error';
-import LazyImg from "@/app/components/LazyImg.js";
+import LazyImg from "@/app/components/lazyimg";
 import { useRouter } from "next/navigation";
 import { setConfig } from "next/config";
 export default function BangumiList(props){

@@ -1,4 +1,3 @@
-"use client";
 import './globals.css'
 import "tw-elements/dist/css/tw-elements.min.css";
 import { Roboto,Noto_Sans_SC } from 'next/font/google'
@@ -6,7 +5,7 @@ import { Roboto,Noto_Sans_SC } from 'next/font/google'
 import Navbar from '@/app/components/navbar.js'
 import Footer from '@/app/components/footer.js';
 import config from './config';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 const roboto = Roboto({weight:"400",subsets:["latin"]});
 const nss = Noto_Sans_SC({weight:"400",subsets:["latin"]});
 

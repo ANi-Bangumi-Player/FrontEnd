@@ -1,10 +1,10 @@
 const config =  {
     API_LIST: {
-        LIST_BANGUMI: 'http://localhost:2999/search', // return all bangumis
-        HOT_BANGUMI: 'http://localhost:2999/search/死神',//return hotest bangumis XD
+        LIST_BANGUMI: 'https://vapi.nvme0n1p.dev/search', // return all bangumis
+        HOT_BANGUMI: 'https://vapi.nvme0n1p.dev/search/死神',//return hotest bangumis XD
         // DAMAKU_URL: 'http://localhost:2999/api/',
-        VIDEO_URL: 'http://localhost:2999/api',
-        SEARCH_URL: 'http://localhost:2999/search/'
+        VIDEO_URL: 'https://vapi.nvme0n1p.dev/api',
+        SEARCH_URL: 'https://vapi.nvme0n1p.dev/search/'
     },
     VIDEO_PLAYER: {
         SOURCE_HOST: "player.tv",
