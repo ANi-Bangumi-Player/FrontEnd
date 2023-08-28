@@ -4,7 +4,8 @@
 
 
 .sidebar {
-    overflow-y: auto;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
     height: 100%;
     background: #f1f2f3;
     border-radius: var(--bd-rad);
@@ -29,6 +30,8 @@ span.item {
     white-space: nowrap;
     cursor: pointer;
     border: 1px solid white;
+    scroll-margin-top: .8em;
+    scroll-snap-align: start;
 }
 
 span.item:last-child {
